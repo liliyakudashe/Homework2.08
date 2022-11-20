@@ -1,12 +1,16 @@
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class Recipes<P extends Product> {
+
+    private final Map<Product, Integer> productIntegerMap = new HashMap<>();
     private String names;
     private List<Product> products;
 
     public Recipes(String name, List<Product> products) {
+
+        if (name == null || name.isBlank()){
+            throw new RuntimeException("Нужно заполнить все поля!");
+        }
         this.names = name;
         this.products = products;
     }
@@ -19,14 +23,24 @@ public class Recipes<P extends Product> {
         return products;
     }
 
-    public double getTheTotalCost() {
-        double theTotalCost = 0;
-        for (int i = 0; i < (products.size()); i++){
-            theTotalCost += products.get(i).getPrice();
+    public void addProduct(Product product, int quantity){
+        if (quantity <= 0){
+            quantity = 1;
+        }
+        if (this.productIntegerMap.containsKey(product)){
+            this.productIntegerMap.put(product, quantity);
+        }
+    }
+
+    public int getTheTotalCost() {
+        int theTotalCost = 0;
+        for (Map.Entry<Product, Integer> productIntegerEntry : this.productIntegerMap.entrySet()) {
+            theTotalCost *= productIntegerEntry.getKey().getPrice() * productIntegerEntry.getValue();
         }
         return theTotalCost;
     }
-    //products.get(i).getPrice()
+
+
 
     @Override
     public String toString() {

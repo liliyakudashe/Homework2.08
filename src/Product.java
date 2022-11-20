@@ -35,7 +35,7 @@ public class Product {
     public static Set<Product> basket(Product... p)  {
        Set<Product> groceryBasket = new HashSet<>();
         for (Product product : p) {
-                    if (groceryBasket.contains(product))
+                    if (!groceryBasket.contains(p))
             throw new RuntimeException("Товар уже есть в корзине!");
         }
         return groceryBasket;

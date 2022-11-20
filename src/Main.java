@@ -13,11 +13,12 @@ public class Main {
 
 
 
-        Set<Product> list = new HashSet<>();
-        list.add(banana);
-        list.add(apricot);
-        list.add(raspberry);
+        Map<Product, Integer> list = new HashMap<>();
+        list.put(banana, 2);
+        list.put(apricot, 10);
+        list.put(raspberry, 50);
         System.out.println(list);
+
 
 
         Recipes fruitSalad = new Recipes("Фруктовый салат", List.of(banana,apricot,melon));
